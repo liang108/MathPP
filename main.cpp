@@ -10,5 +10,7 @@ int main(){
     Vector<Complex> v1;
     v1.Append(z);
     v1[0].Print();
+    Complex result = z.Conjugate();
+    std::cout << result.GetImag() << std::endl;
     return 0;
 }

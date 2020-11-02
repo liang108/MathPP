@@ -16,11 +16,11 @@ class Complex
         Complex& operator=(const Complex& z1);          // Return reference to a complex
 
         // Member functions
-        Complex GetConjugate();                         // Conjugate of z = a+bi is z_bar = a-bi
+        Complex Conjugate();                         // Conjugate of z = a+bi is z_bar = a-bi
         double GetReal() const;
         double GetImag() const;
-        double GetAbsolute() const;                     // Absolute value or modulus
-        double GetDistance(const Complex& z1) const;    // Distance between two complex numbers
+        double Absolute() const;                     // Absolute value or modulus
+        double Distance(const Complex& z1) const;    // Distance between two complex numbers
         void SetReal(double real);
         void SetImag(double imag);
         void Print() const;                                   // Output to console in form a+bi

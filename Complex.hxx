@@ -30,7 +30,7 @@ Complex& Complex::operator=(const Complex& z1)
     return *this;
 }
 
-Complex Complex::GetConjugate()
+Complex Complex::Conjugate()
 {
     Complex conjugate = Complex(real_, (imag_*-1));
     return conjugate;
@@ -46,16 +46,16 @@ double Complex::GetImag() const
     return imag_;
 }
 
-double Complex::GetAbsolute() const
+double Complex::Absolute() const
 {
     return sqrt((real_ * real_) + (imag_ * imag_));
 }
 
-double Complex::GetDistance(const Complex& z1) const
+double Complex::Distance(const Complex& z1) const
 {
     Complex difference = Complex(real_, imag_);
     difference = difference - z1;
-    return difference.GetAbsolute();
+    return difference.Absolute();
 }
 
 void Complex::SetReal(double real)
@@ -70,7 +70,7 @@ void Complex::SetImag(double imag)
 
 void Complex::Print() const
 {
-    std::cout << real_ << " + " << imag_ << "i";
+    std::cout << real_ << " + " << imag_ << "i\n";
 }
 
 bool Complex::operator==(const Complex& z1) const
