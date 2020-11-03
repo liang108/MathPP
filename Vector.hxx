@@ -9,18 +9,18 @@ Vector<T>::Vector()
 {
     // Initialize empty vector
     size_ = 0;
-    data_ = nullptr;
+    entries_ = nullptr;
 }
 
 template<typename T>
 Vector<T>::Vector(int size)
 {
     size_ = size;
-    data_ = new T[size_];
+    entries_ = new T[size_];
     //fill vector with zeros
     for (int i=0; i<size_; i++)
     {
-        data_[i] = 0;
+        entries_[i] = 0;
     }
 }
 
@@ -28,17 +28,17 @@ template<typename T>
 Vector<T>::Vector(const Vector<T>& v1)
 {
     size_ = v1.size_;
-    data_ = new T[size_];
+    entries_ = new T[size_];
     for (int i=0; i < size_; i++)
     {
-        data_[i] = v1.data_[i];
+        entries_[i] = v1.entries_[i];
     }
 }
 
 template<typename T>
 Vector<T>::~Vector()
 {
-    delete[] data_;
+    delete[] entries_;
 }
 
 template<typename T>
@@ -50,7 +50,7 @@ int Vector<T>::GetSize() const
 template<typename T>
 void Vector<T>::SetElement(int index, const T& element)
 {
-    data_[index] = element;
+    entries_[index] = element;
 }
 
 template<typename T>
@@ -60,24 +60,24 @@ void Vector<T>::Append(const T& element)
     if (size_ == 0)                     // If vector is empty, need to avoid copying junk values
     {
         new_data[0] = element;
-        data_ = new_data;
+        entries_ = new_data;
         size_++;
         return;
     }
     for (int i=0; i<size_; i++)         // Copy values from old array
     {
-        new_data[i] = data_[i];
+        new_data[i] = entries_[i];
     }
     new_data[size_] = element;          // Set last element of new array to element being appended
     size_++;
-    data_ = new_data;
+    entries_ = new_data;
     new_data = nullptr;
 }
 
 template<typename T>
 T Vector<T>::GetElement(int index) const
 {
-    return data_[index];
+    return entries_[index];
 }
 
 template<typename T>
@@ -95,18 +95,18 @@ T& Vector<T>::operator[](int i)
         throw std::out_of_range("Given index is not in vector");
     }
 
-    return data_[i];
+    return entries_[i];
 }
 
 template<typename T>
 Vector<T>& Vector<T>::operator=(const Vector<T>& v1)
 {
     size_ = v1.size_;
-    delete[] data_;
-    data_ = new T[size_];
+    delete[] entries_;
+    entries_ = new T[size_];
     for (int i=0; i < size_; i++)
     {
-        data_[i] = v1.data_[i];
+        entries_[i] = v1.entries_[i];
     }
     return *this;
 }
@@ -122,7 +122,7 @@ Vector<T> Vector<T>::operator+(const Vector<T>& v1) const
     }
     for (int i=0; i < size_; i++)
     {
-        new_vector[i] = (data_[i] + v1.data_[i]);
+        new_vector[i] = (entries_[i] + v1.entries_[i]);
     }
     return new_vector;
 }
@@ -138,7 +138,7 @@ Vector<T> Vector<T>::operator-(const Vector<T>& v1) const
     }
     for (int i=0; i < size_; i++)
     {
-        new_vector[i] = (data_[i] - v1.data_[i]);
+        new_vector[i] = (entries_[i] - v1.entries_[i]);
     }
     return new_vector;    
 }
@@ -162,7 +162,7 @@ T Vector<T>::length() const
     T len;
     for (int i=0; i < size_; i++)
     {
-        len = len + (data_[i]*data_[i]);
+        len = len + (entries_[i]*entries_[i]);
     }
     return sqrt(len);
 }

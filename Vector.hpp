@@ -6,8 +6,9 @@ template<typename T>
 class Vector
 {
     private:
-        T * data_;                                        // Pointer to array of entries. Insist that data is allocated dynamically
+        T * entries_;                                     // Pointer to array of entries of type T
         int size_;                                        // Track size of vector
+        friend class Matrix;
     public:
         // Constructors - TODO: check that data type being instantiated is either int, double, or complex
         Vector();                                         // Default sets an empty vector with size 0
