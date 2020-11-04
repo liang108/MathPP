@@ -1,6 +1,7 @@
 #pragma once
 
 //Use templates to allow for complex numbers, ints, and doubles
+//Vector as used in linear algebra
 
 template<typename T>
 class Vector

@@ -3,6 +3,7 @@
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
+#include <cassert>
 
 template<typename T>
 Vector<T>::Vector()
@@ -15,12 +16,13 @@ Vector<T>::Vector()
 template<typename T>
 Vector<T>::Vector(int size)
 {
+    assert(size > 0);
     size_ = size;
     entries_ = new T[size_];
     //fill vector with zeros
     for (int i=0; i<size_; i++)
     {
-        entries_[i] = 0;
+        entries_[i] = T();          // Call default constructor for T objects
     }
 }
 
