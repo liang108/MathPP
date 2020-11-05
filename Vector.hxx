@@ -160,7 +160,7 @@ Vector<T> Vector<T>::operator-(const Vector<T>& v1) const
 template<typename T>
 Vector<T> Vector<T>::operator*(const T& scalar) const
 {
-    Vector<T> new_vector = Vector(size_);
+    Vector<T> new_vector = Vector(*this);
     for (int i=0; i < size_; i++)
     {
         new_vector[i] = new_vector[i]*scalar;
@@ -173,7 +173,7 @@ double Vector<T>::operator*(const Vector<T>& v1) const
 {   
     // Dot product of two vectors
     assert(size_ == v1.GetSize());                  // Ensure vectors are same length
-    double result;                                  // A scalar value
+    double result = 0;                                  // A scalar value
     for(int i=0; i < size_; i++)
     {       
         result = result + (entries_[i] * v1.entries_[i]);
