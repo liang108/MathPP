@@ -1,4 +1,5 @@
 #include "Vector.hpp"
+#include "Matrix.hpp"
 #include "Complex.hpp"
 #include <iostream>
 #include <cmath>

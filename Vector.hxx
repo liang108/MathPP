@@ -157,14 +157,49 @@ Vector<T> Vector<T>::operator*(const T& scalar) const
 }
 
 template<typename T>
-T Vector<T>::length() const
+double Vector<T>::operator*(const Vector<T>& v1) const
+{   
+    // Dot product of two vectors
+    assert(size_ == v1.GetSize());                  // Ensure vectors are same length
+    double result;                                  // A scalar value
+    for(int i=0; i < size_; i++)
+    {       
+        result = result + (entries_[i] * v1.entries_[i]);
+    }
+    return result;
+}
+
+/*Complex operator*(const Vector<Complex>& v1, const Vector<Complex>& v2)
+{
+    // Need to use conjugate of v2 entries
+    assert(v1.GetSize() == v1.GetSize());                  // Ensure vectors are same length
+    Complex result;                                  // A scalar value
+    for(int i=0; i < v1.GetSize(); i++)
+    {       
+        result = result + (v1.entries_[i] * v2.entries_[i].Conjugate());
+    }
+    return result;
+}*/
+
+template<typename T>
+double length(const Vector<T>& v1)
 {
     // Return the length of the vector (not the number of elements but the actual length, ie. the norm)
     // Norm of a vector x in R^n as sqrt(x_1^2 + x_2^2 + ... + x_n^2)
-    T len;
-    for (int i=0; i < size_; i++)
+    double len;
+    for (int i=0; i < v1.GetSize(); i++)
     {
-        len = len + (entries_[i]*entries_[i]);
+        len = len + (v1.entries_[i] * v1.entries_[i]);
     }
     return sqrt(len);
 }
+
+/*double length_complex(const Vector<Complex>& v1)
+{
+    double len;
+    for (int i=0; i < v1.GetSize(); i++)
+    {
+        len = len + (v1.entries_[i] * v1.entries_[i].Conjugate());
+    }
+    return len;
+}*/

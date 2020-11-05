@@ -1,5 +1,7 @@
 #pragma once
 
+// TODO: Define operators (multiplication, length) to work with complex numbers
+//#include "Complex.hpp"
 //Use templates to allow for complex numbers, ints, and doubles
 //Vector as used in linear algebra
 
@@ -9,16 +11,15 @@ class Vector
     private:
         T * entries_;                                     // Pointer to array of entries of type T
         int size_;                                        // Track size of vector
-        friend class Matrix;
     public:
         // Constructors - TODO: check that data type being instantiated is either int, double, or complex
-        Vector();                                         // Default sets an empty vector with size 0
-        Vector(int size);                                 // Non-default, initialize with size, entries are all 0
-        Vector(T * data);                                 // Non-default, initialize with an existing array
-        Vector(const Vector<T>& v1);                      // Copy constructor
+        Vector<T>();                                         // Default sets an empty vector with size 0
+        Vector<T>(int size);                                 // Non-default, initialize with size, entries are all 0
+        Vector<T>(T * data);                                 // Non-default, initialize with an existing array
+        Vector<T>(const Vector<T>& v1);                      // Copy constructor
         
         // Destructor
-        ~Vector();                                        // De-allocate array memory on heap
+        ~Vector<T>();                                        // De-allocate array memory on heap
         
         // Member functions
         int GetSize() const;                              // Return data member size_
@@ -36,9 +37,19 @@ class Vector
         Vector<T> operator+(const Vector<T>& v1) const;   // Binary +
         Vector<T> operator-(const Vector<T>& v1) const;   // Binary -
         Vector<T> operator*(const T& scalar) const;       // Binary Scalar Multiplication
+        double operator*(const Vector<T>& v1) const;      // Dot product, returns scalar
+        //friend Complex operator*(const Vector<Complex>& v1);      // Dot product of complex vectors
 
         // Length of vector (aka norm)
-        T length() const;                               
+        friend double length(const Vector<T>& v1);        // For real vectors only
+        //friend double length_complex(const Vector<Complex>& v1);    // For complex vector                      
 };
+
+//Complex operator*(const Vector<Complex>& v1, const Vector<Complex>& v2);
+
+template<typename T>
+double length(const Vector<T>& v1);
+
+//double length_complex(const Vector<Complex>& v1);
 
 #include "Vector.hxx"

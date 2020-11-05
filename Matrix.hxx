@@ -6,8 +6,8 @@ template<typename T>
 Matrix<T>::Matrix()
 {
     data_ = nullptr;
-    num_rows = 0;
-    num_cols = 0;
+    num_rows_ = 0;
+    num_cols_ = 0;
 }
 
 template<typename T>
@@ -58,10 +58,10 @@ Matrix<T>::Matrix(const Matrix& m1)
 {
     num_rows_ = m1.num_rows_;
     num_cols_ = m1.num_cols_;
-    data_ = new T*[num_rows];
-    for (int i=0; i < num_rows; i++)
+    data_ = new T*[num_rows_];
+    for (int i=0; i < num_rows_; i++)
     {
-        for (int j=0; j < num_cols; j++)
+        for (int j=0; j < num_cols_; j++)
         {
             data_[i][j] = m1.data_[i][j];
         }
@@ -111,14 +111,14 @@ Matrix<T>& Matrix<T>::operator=(const Matrix& m1)
     }
 
     delete[] data_;
-    data_ = new T*[num_rows];
+    data_ = new T*[num_rows_];
     
     // Create new matrix and fill with entries of m1
     num_rows_ = m1.num_rows_;
     num_cols_ = m1.num_cols_;
     for (int i=0; i < num_rows_; i++)
     {
-        data_[i] = new T[num_cols];
+        data_[i] = new T[num_cols_];
         for (int j=0; j < num_cols_; j++)
         {
             data_[i][j] = m1.data_[i][j];
@@ -167,4 +167,34 @@ Matrix<T> Matrix<T>::operator*(double scalar) const
             data_[i][j] = data_[i][j] * scalar;
         }
     }
+}
+
+template<typename T>
+Vector<T> operator*(const Matrix<T>& m, const Vector<T>& v)
+{
+    assert(v.GetSize() == m.GetNumCols());
+    Vector<T> prod = Vector<T>(v.GetSize());            // initialize new vector with same size as v, all 0
+    for (int i=0; i < v.GetSize(); i++)
+    {
+        for (int j=0; j < m.GetNumCols(); j++)
+        {
+            prod.entries_[i] = prod.entries_[i] + (m.data_[i][j] * v.entries_[j]);
+        }
+    }
+    return prod;
+}
+
+template<typename T>
+Vector<T> operator*(const Vector<T>& v, const Matrix<T>& m) // Same implementation as above
+{
+    assert(v.GetSize() == m.GetNumCols());
+    Vector<T> prod = Vector<T>(v.GetSize());            // initialize new vector with same size as v, all 0
+    for (int i=0; i < v.GetSize(); i++)
+    {
+        for (int j=0; j < m.GetNumCols(); j++)
+        {
+            prod.entries_[i] = prod.entries_[i] + (m.data_[i][j] * v.entries_[j]);
+        }
+    }
+    return prod;
 }
