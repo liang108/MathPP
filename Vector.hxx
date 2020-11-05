@@ -27,6 +27,18 @@ Vector<T>::Vector(int size)
 }
 
 template<typename T>
+Vector<T>::Vector(T * data)         // Given an array, copy elements into data_
+{                                   // and set size
+    size_ = (sizeof(data)/sizeof(data[0]));
+    assert(size_ > 0);
+    entries_ = new T[size_];
+    for (int i=0; i < size_; i++)
+    {
+        entries_[i] = data[i];
+    }
+}
+
+template<typename T>
 Vector<T>::Vector(const Vector<T>& v1)
 {
     size_ = v1.size_;
