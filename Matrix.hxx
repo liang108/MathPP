@@ -23,7 +23,7 @@ Matrix<T>::Matrix(size_t num_rows, size_t num_cols)
 
     for (int i=0; i < num_rows; i++)
     {
-        data_[i] = new Vector<T>[num_cols];
+        data_[i] = new T[num_cols];
         for (int j=0; j < num_cols; j++)
         {
             data_[i][j] = T();              // Call default constructor for objects of type T
@@ -92,7 +92,7 @@ int Matrix<T>::GetNumCols()
 }
 
 template<typename T>
-double& Matrix<T>::operator()(int i, int j)
+T& Matrix<T>::operator()(int i, int j)
 {
     assert(i > 0);
     assert(i < num_rows_ + 1);
@@ -170,30 +170,15 @@ Matrix<T> Matrix<T>::operator*(double scalar) const
 }
 
 template<typename T>
-Vector<T> operator*(const Matrix<T>& m, const Vector<T>& v)
+Vector<T> Matrix<T>::operator*(const Vector<T>& v) const
 {
-    assert(v.GetSize() == m.GetNumCols());
+    assert(v.GetSize() == GetNumCols());
     Vector<T> prod = Vector<T>(v.GetSize());            // initialize new vector with same size as v, all 0
     for (int i=0; i < v.GetSize(); i++)
     {
-        for (int j=0; j < m.GetNumCols(); j++)
+        for (int j=0; j < GetNumCols(); j++)
         {
-            prod.entries_[i] = prod.entries_[i] + (m.data_[i][j] * v.entries_[j]);
-        }
-    }
-    return prod;
-}
-
-template<typename T>
-Vector<T> operator*(const Vector<T>& v, const Matrix<T>& m) // Same implementation as above
-{
-    assert(v.GetSize() == m.GetNumCols());
-    Vector<T> prod = Vector<T>(v.GetSize());            // initialize new vector with same size as v, all 0
-    for (int i=0; i < v.GetSize(); i++)
-    {
-        for (int j=0; j < m.GetNumCols(); j++)
-        {
-            prod.entries_[i] = prod.entries_[i] + (m.data_[i][j] * v.entries_[j]);
+            prod.entries_[i] = prod.entries_[i] + (data_[i][j] * v.entries_[j]);
         }
     }
     return prod;

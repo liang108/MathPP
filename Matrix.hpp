@@ -27,22 +27,12 @@ class Matrix
         int GetNumCols();
 
         // Operators
-        double& operator()(int i, int j);                     // 1-based indexing operator
+        T& operator()(int i, int j);                     // 1-based indexing operator
         Matrix<T>& operator=(const Matrix<T>& m1);            // Copy assignment
         Matrix<T> operator+(const Matrix<T>& m1) const;       // Binary addition, checks if matrices are equal size
         Matrix<T> operator-(const Matrix<T>& m1) const;       // Binary subtraction
         Matrix<T> operator*(double scalar) const;             // Scalar multiplication
-
-        // Friend functions
-        friend Vector<T> operator*(const Matrix<T>& m, const Vector<T>& v);      // Multiply a matrix and vector
-        friend Vector<T> operator*(const Vector<T>& v, const Matrix<T>& m);      // Same, but parameters switched for usability
+        Vector<T> operator*(const Vector<T>& v) const;      // Multiply a matrix and vector
 };
-
-// Definitions for friend functions
-template<typename T>
-Vector<T> operator*(const Matrix<T>& m, const Vector<T>& v);
-
-template<typename T>
-Vector<T> operator*(const Vector<T>& v, const Matrix<T>& m);
 
 #include "Matrix.hxx"

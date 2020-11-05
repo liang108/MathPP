@@ -41,15 +41,12 @@ class Vector
         //friend Complex operator*(const Vector<Complex>& v1);      // Dot product of complex vectors
 
         // Length of vector (aka norm)
-        friend double length(const Vector<T>& v1);        // For real vectors only
+        double length() const;        // For real vectors only
+        
         //friend double length_complex(const Vector<Complex>& v1);    // For complex vector                      
 };
 
 //Complex operator*(const Vector<Complex>& v1, const Vector<Complex>& v2);
-
-template<typename T>
-double length(const Vector<T>& v1);
-
 //double length_complex(const Vector<Complex>& v1);
 
 #include "Vector.hxx"

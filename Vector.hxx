@@ -182,14 +182,14 @@ double Vector<T>::operator*(const Vector<T>& v1) const
 }*/
 
 template<typename T>
-double length(const Vector<T>& v1)
+double Vector<T>::length() const
 {
     // Return the length of the vector (not the number of elements but the actual length, ie. the norm)
     // Norm of a vector x in R^n as sqrt(x_1^2 + x_2^2 + ... + x_n^2)
     double len;
-    for (int i=0; i < v1.GetSize(); i++)
+    for (int i=0; i < GetSize(); i++)
     {
-        len = len + (v1.entries_[i] * v1.entries_[i]);
+        len = len + (entries_[i] * entries_[i]);
     }
     return sqrt(len);
 }

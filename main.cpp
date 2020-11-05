@@ -6,12 +6,11 @@
 
 int main(){
 
-    Complex z = Complex(7, 6.20);
-    z.Print();
-    Vector<Complex> v1;
-    v1.Append(z);
-    v1[0].Print();
-    Complex result = z.Conjugate();
-    std::cout << result.GetImag() << std::endl;
+    Matrix<int> my_matrix = Matrix<int>(5, 5);
+    std::cout<< my_matrix.GetNumCols();
+    std::cout << my_matrix.GetNumRows();
+    int result = my_matrix(1,1);
+    std::cout << result;
+
     return 0;
 }
