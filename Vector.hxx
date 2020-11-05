@@ -198,6 +198,7 @@ double Vector<T>::length() const
 {
     // Return the length of the vector (not the number of elements but the actual length, ie. the norm)
     // Norm of a vector x in R^n as sqrt(x_1^2 + x_2^2 + ... + x_n^2)
+    assert(size_ > 0);                  // Check vector is not empty
     double len;
     for (int i=0; i < GetSize(); i++)
     {
