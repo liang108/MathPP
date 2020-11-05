@@ -1,4 +1,5 @@
 #pragma once
+#include <cstddef>
 
 // TODO: Define operators (multiplication, length) to work with complex numbers
 //#include "Complex.hpp"
@@ -10,12 +11,12 @@ class Vector
 {
     private:
         T * entries_;                                     // Pointer to array of entries of type T
-        int size_;                                        // Track size of vector
+        size_t size_;                                        // Track size of vector
     public:
-        // Constructors - TODO: check that data type being instantiated is either int, double, or complex
+        // Constructors 
         Vector<T>();                                         // Default sets an empty vector with size 0
-        Vector<T>(int size);                                 // Non-default, initialize with size, entries are all 0
-        Vector<T>(T * data);                                 // Non-default, initialize with an existing array
+        Vector<T>(size_t size);                                 // Non-default, initialize with size, entries are all 0
+        Vector<T>(T * data, size_t size);                                 // Non-default, initialize with an existing array
         Vector<T>(const Vector<T>& v1);                      // Copy constructor
         
         // Destructor
