@@ -11,16 +11,16 @@ class Vector
 {
     private:
         T * entries_;                                     // Pointer to array of entries of type T
-        size_t size_;                                        // Track size of vector
+        size_t size_;                                     // Track size of vector
     public:
         // Constructors 
-        Vector<T>();                                         // Default sets an empty vector with size 0
-        Vector<T>(size_t size);                                 // Non-default, initialize with size, entries are all 0
-        Vector<T>(T * data, size_t size);                                 // Non-default, initialize with an existing array
-        Vector<T>(const Vector<T>& v1);                      // Copy constructor
+        Vector<T>();                                      // Default sets an empty vector with size 0
+        Vector<T>(size_t size);                           // Non-default, initialize with size, entries are all 0
+        Vector<T>(T * data, size_t size);                 // Non-default, initialize with an existing array
+        Vector<T>(const Vector<T>& v1);                   // Copy constructor
         
         // Destructor
-        ~Vector<T>();                                        // De-allocate array memory on heap
+        ~Vector<T>();                                     // De-allocate array memory on heap
         
         // Member functions
         int GetSize() const;                              // Return data member size_

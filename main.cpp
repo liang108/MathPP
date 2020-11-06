@@ -3,6 +3,7 @@
 #include "Complex.hpp"
 #include <iostream>
 #include <cmath>
+#include <cassert>
 
 int main(){
     int * my_array = new int[3];
