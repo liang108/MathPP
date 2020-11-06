@@ -42,7 +42,7 @@ class Vector
         //friend Complex operator*(const Vector<Complex>& v1);      // Dot product of complex vectors
 
         // Length of vector (aka norm)
-        double length() const;        // For real vectors only
+        double norm() const;        // For real vectors only
         
         //friend double length_complex(const Vector<Complex>& v1);    // For complex vector                      
 };

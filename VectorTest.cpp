@@ -111,11 +111,19 @@ int main()
     v1 = v1 * 10;
     assert(v1[0] == 10);
 
-    // 6. Dot Product operator *
-    assert(v1.length() == 10);
+    // 6. Dot product * operator
+    assert(v1*v1 == 100);
+    
+    Vector<int> v10(a1, 5);
+    Vector<int> v11(v10);
+    v11.SetElement(4, 10);
+    assert(v10*v11 == 80);
+
+    // Norm function
+    assert(v1.norm() == 10);
     v1.SetElement(0, 1);
     v1.Append(1);
-    assert(v1.length() == sqrt(2));
+    assert(v1.norm() == sqrt(2));
     
 
     std::cout << "Testing completed." << std::endl;

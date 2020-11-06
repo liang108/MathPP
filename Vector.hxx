@@ -194,7 +194,7 @@ double Vector<T>::operator*(const Vector<T>& v1) const
 }*/
 
 template<typename T>
-double Vector<T>::length() const
+double Vector<T>::norm() const
 {
     // Return the length of the vector (not the number of elements but the actual length, ie. the norm)
     // Norm of a vector x in R^n as sqrt(x_1^2 + x_2^2 + ... + x_n^2)
