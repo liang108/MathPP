@@ -96,6 +96,28 @@ int main()
     v8 = v8 - v1;
     assert(v8[0] == 0);
 
+    Vector<int> v9(v5);
+    v9.SetElement(6, 8);
+    v9 = v9 - v5;
+    assert(v9[0] == 0);
+    assert(v9[6] == 1);
+
+    // 5. Scalar * Operator
+    v9 = v9 * 3;
+    assert(v9.GetSize() == 7);
+    assert(v9[3] == 0);
+    assert(v9[6] == 3);
+
+    v1 = v1 * 10;
+    assert(v1[0] == 10);
+
+    // 6. Dot Product operator *
+    assert(v1.length() == 10);
+    v1.SetElement(0, 1);
+    v1.Append(1);
+    assert(v1.length() == sqrt(2));
+    
+
     std::cout << "Testing completed." << std::endl;
     return 0;
 }

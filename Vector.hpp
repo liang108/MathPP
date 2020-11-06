@@ -37,7 +37,7 @@ class Vector
         // Arithmetic - note that we don't want to change the original vectors, only return a copy of modified entries
         Vector<T> operator+(const Vector<T>& v1) const;   // Binary +
         Vector<T> operator-(const Vector<T>& v1) const;   // Binary -
-        Vector<T> operator*(const T& scalar) const;       // Binary Scalar Multiplication
+        Vector<T> operator*(const T& scalar) const;       // Scalar Multiplication, returns vector
         double operator*(const Vector<T>& v1) const;      // Dot product, returns scalar
         //friend Complex operator*(const Vector<Complex>& v1);      // Dot product of complex vectors
 
