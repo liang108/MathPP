@@ -98,27 +98,38 @@ template<typename T>
 void Matrix<T>::AppendRow(const Vector<T>& v)
 {
     assert(v.GetSize() == GetNumCols());
+    // Copy current data to use in new matrix
     T** old_data = data_;
+    
+    // Delete old matrix to free up memory
     for(int i=0; i < num_rows_; i++)
     {
         delete[] data_[i];
     }
     delete[] data_;
+
+    // Allocate memory for new matrix with one more row
     data_ = new T*[num_rows_+1];
     
     for (int i=0; i < num_rows_; i++)
     {
+        // Allocate new memory for each row
         data_[i] = new T[num_cols_];
+
+        // Copy entries from old matrix into new one
         for (int j=0; j < num_cols_; j++)
         {
             data_[i][j] = old_data[i][j];
         }
+    
+        // Clear each row in old matrix
         delete[] old_data[i];
     }
 
+    // Append values from vector into last row
     for (int i=0; i < v.GetSize(); i++)
     {
-        data_[num_rows_] = v[i];
+        data_[num_rows_][i] = v[i];
     }
 
     delete[] old_data;
@@ -126,7 +137,6 @@ void Matrix<T>::AppendRow(const Vector<T>& v)
 }
 
 
-//TODO: tHIS
 template<typename T>
 void Matrix<T>::AppendCol(const Vector<T>& v)
 {
@@ -136,12 +146,16 @@ void Matrix<T>::AppendCol(const Vector<T>& v)
     for (int i=0; i < num_rows_; i++)
     {
         delete[] data_[i];
+        // Extend rows by one
         data_[i] = new T[num_cols_ + 1];
+
+        // Copy data from old matrix
         for (int j=0; j < num_cols_; j++)
         {
             data_[i][j] = old_data[i][j];
             if (j == num_cols_ - 1)
             {
+                // Add the ith entry of the vector into the last entry of the current row
                 data_[i][num_cols_] = v[i];
             } 
             delete[] old_data[i];
