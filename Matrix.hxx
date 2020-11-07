@@ -125,6 +125,8 @@ void Matrix<T>::AppendRow(const Vector<T>& v)
     num_rows_++;
 }
 
+
+//TODO: tHIS
 template<typename T>
 void Matrix<T>::AppendCol(const Vector<T>& v)
 {
@@ -134,7 +136,7 @@ void Matrix<T>::AppendCol(const Vector<T>& v)
     for (int i=0; i < num_rows_; i++)
     {
         delete[] data_[i];
-        data_ = new T[num_cols_ + 1];
+        data_[i] = new T[num_cols_ + 1];
         for (int j=0; j < num_cols_; j++)
         {
             data_[i][j] = old_data[i][j];
