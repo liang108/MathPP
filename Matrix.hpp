@@ -16,7 +16,9 @@ class Matrix
         // Constructors
         Matrix<T>();                                       // Initialize empty matrix, data_ is nullptr
         Matrix<T>(size_t num_rows, size_t num_cols);       // Initialize with dimensions, entries are all 0
-        Matrix<T>(const Vector<Vector<T>>& v1);            // Given a vector of vectors, assert all are equal length
+        
+        // Fails to construct: Matrix<T>(const T** data, size_t num_rows, size_t num_cols);            // Given a vector of vectors, assert all are equal length
+        
         Matrix<T>(const Matrix& m1);                       // Copy Constructor
 
         // Destructor
@@ -25,14 +27,16 @@ class Matrix
         // Member functions
         int GetNumRows();
         int GetNumCols();
+        void AppendRow(const Vector<T>& v);                // Append to bottom of matrix (assert vector length == num_cols)
+        void AppendCol(const Vector<T>& v);                // Append to right of matrix (assert vector length == num_rows)
 
         // Operators
-        T& operator()(int i, int j);                     // 1-based indexing operator
+        T& operator()(int i, int j);                          // 1-based indexing operator
         Matrix<T>& operator=(const Matrix<T>& m1);            // Copy assignment
         Matrix<T> operator+(const Matrix<T>& m1) const;       // Binary addition, checks if matrices are equal size
         Matrix<T> operator-(const Matrix<T>& m1) const;       // Binary subtraction
         Matrix<T> operator*(double scalar) const;             // Scalar multiplication
-        Vector<T> operator*(const Vector<T>& v) const;      // Multiply a matrix and vector
+        Vector<T> operator*(const Vector<T>& v) const;        // Multiply a matrix and vector
 };
 
 #include "Matrix.hxx"

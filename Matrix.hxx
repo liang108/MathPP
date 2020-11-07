@@ -31,27 +31,29 @@ Matrix<T>::Matrix(size_t num_rows, size_t num_cols)
     }
 }
 
-template<typename T>
-Matrix<T>::Matrix(const Vector<Vector<T>>& v1)
-{
-    assert(v1.GetSize() > 0);
-    assert(v1[0].GetSize() > 0);
-    for (int i=0; i < v1.GetSize(); i++)                // Check vectors are all same length, by checking them
-    {
-        assert(v1[i].GetSize() == v1[0].GetSize());     // against the length of first vector (should all be equal)                                                            
-    }                                                   
-    num_rows_ = v1.GetSize();
-    num_cols_ = v1[0].GetSize();
+/* template<typename T>
+Matrix<T>::Matrix(const T** data, size_t num_rows, size_t num_cols)
+{   
+    // Passing in 2D array, and dimensions
+    // Check dimensions are not empty
+    assert(num_rows > 0);
+    assert(num_cols > 0);     
+    num_rows_ = num_rows;
+    num_cols_ = num_cols;
+
+    // Initialize new matrix
     data_ = new T*[num_rows_];
+
+    // Copy over values from T** data
     for (int i=0; i < num_rows_; i++)
     {
         data_[i] = new T[num_cols_];
         for (int j=0; j < num_cols_; j++)
         {
-            data_[i][j] = v1[i][j];
+            data_[i][j] = data[i][j];
         }
     }
-}
+} */
 
 template<typename T>
 Matrix<T>::Matrix(const Matrix& m1)
@@ -61,6 +63,7 @@ Matrix<T>::Matrix(const Matrix& m1)
     data_ = new T*[num_rows_];
     for (int i=0; i < num_rows_; i++)
     {
+        data_[i] = new T[num_cols_];
         for (int j=0; j < num_cols_; j++)
         {
             data_[i][j] = m1.data_[i][j];
@@ -89,6 +92,62 @@ template<typename T>
 int Matrix<T>::GetNumCols()
 {
     return num_cols_;
+}
+
+template<typename T>
+void Matrix<T>::AppendRow(const Vector<T>& v)
+{
+    assert(v.GetSize() == GetNumCols());
+    T** old_data = data_;
+    for(int i=0; i < num_rows_; i++)
+    {
+        delete[] data_[i];
+    }
+    delete[] data_;
+    data_ = new T*[num_rows_+1];
+    
+    for (int i=0; i < num_rows_; i++)
+    {
+        data_[i] = new T[num_cols_];
+        for (int j=0; j < num_cols_; j++)
+        {
+            data_[i][j] = old_data[i][j];
+        }
+        delete[] old_data[i];
+    }
+
+    for (int i=0; i < v.GetSize(); i++)
+    {
+        data_[num_rows_] = v[i];
+    }
+
+    delete[] old_data;
+    num_rows_++;
+}
+
+template<typename T>
+void Matrix<T>::AppendCol(const Vector<T>& v)
+{
+    assert(v.GetSize() == GetNumRows());
+    T** old_data = data_;
+
+    for (int i=0; i < num_rows_; i++)
+    {
+        delete[] data_[i];
+        data_ = new T[num_cols_ + 1];
+        for (int j=0; j < num_cols_; j++)
+        {
+            data_[i][j] = old_data[i][j];
+            if (j == num_cols_ - 1)
+            {
+                data_[i][num_cols_] = v[i];
+            } 
+            delete[] old_data[i];
+        }
+    }
+
+    delete[] old_data;
+    num_cols_++;
 }
 
 template<typename T>
