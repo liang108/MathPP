@@ -145,7 +145,9 @@ void Matrix<T>::AppendCol(const Vector<T>& v)
 
     for (int i=0; i < num_rows_; i++)
     {
+        // Clear ith vector in old matrix
         delete[] data_[i];
+        
         // Extend rows by one
         data_[i] = new T[num_cols_ + 1];
 
@@ -153,13 +155,10 @@ void Matrix<T>::AppendCol(const Vector<T>& v)
         for (int j=0; j < num_cols_; j++)
         {
             data_[i][j] = old_data[i][j];
-            if (j == num_cols_ - 1)
-            {
-                // Add the ith entry of the vector into the last entry of the current row
-                data_[i][num_cols_] = v[i];
-            } 
-            delete[] old_data[i];
         }
+        // Add the ith entry of the vector into the last entry of the current row
+        data_[i][num_cols_] = v[i];
+        delete[] old_data[i];
     }
 
     delete[] old_data;
