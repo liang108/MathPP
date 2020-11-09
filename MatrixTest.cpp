@@ -19,7 +19,8 @@ int main()
     Matrix<int> m2(1, 1);
     assert(m2.GetNumRows() == 1);
     assert(m2.GetNumCols() == 1);
-    
+    assert(m2(1,1) == 0);
+
     Matrix<int> m3(10, 10);
     assert(m3.GetNumRows() == 10);
     assert(m3.GetNumCols() == 10);
