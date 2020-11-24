@@ -94,6 +94,13 @@ T Vector<T>::GetElement(int index) const
     return entries_[index];
 }
 
+/************ TODO: IMPLEMENT THIS as a CONST indexer 
+template<typename T>
+T Vector<T>::operator()(int i) const
+AND USE IT IN MATRIX APPEND ROW TO MAINTAIN CONST QUALIFIER
+****/
+
+
 template<typename T>
 T& Vector<T>::operator[](int i)
 {   

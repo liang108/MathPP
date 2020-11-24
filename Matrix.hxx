@@ -98,6 +98,7 @@ template<typename T>
 void Matrix<T>::AppendRow(const Vector<T>& v)
 {
     assert(v.GetSize() == GetNumCols());
+
     // Copy current data to use in new matrix
     T** old_data = data_;
     

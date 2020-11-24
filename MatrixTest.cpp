@@ -25,8 +25,21 @@ int main()
     assert(m3.GetNumRows() == 10);
     assert(m3.GetNumCols() == 10);
 
-    // 3. Non-default with 
+    // 3. Copy constructor
+    Matrix<int> m4(m3);
+    assert(m4.GetNumRows() == 10);
+    assert(m4.GetNumCols() == 10);
+    assert(m4(1,1) == 0);
+    assert(m4(10,10) == 0);
 
+    // Member functions
+
+    // GetNumRows and GetNumCols pass above tests
+    // 1. Append Row
+    Vector<int> v1(10);
+    v1[9] = 42;
+    m4.AppendRow(v1);
+    assert(m4.GetNumRows() == 11);
 
     std::cout << "Testing completed." << std::endl;
     return 0;
